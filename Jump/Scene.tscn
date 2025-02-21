@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cardskaikpuah"]
+
+[ext_resource type="PackedScene" uid="uid://e6t6atol4hoi" path="res://Objects/player.tscn" id="1_npt64"]
+[ext_resource type="Script" path="res://PlayerCamera.cs" id="2_4ki4o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ak32r"]
+size = Vector3(8, 1, 8)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_56eub"]
+size = Vector2(8, 8)
+
+[node name="Scene" type="Node3D"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989313, 0.145807, 0, -0.145807, 0.989313, -0.010952, 1.729, -0.155103)
+collision_mask = 2
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" node_paths=PackedStringArray("target", "arm")]
+transform = Transform3D(1, 0, 0, 0, 0.996704, 0.081121, 0, -0.081121, 0.996704, 0, 0.576276, 8.26536)
+script = ExtResource("2_4ki4o")
+target = NodePath("../../CharacterBody3D")
+arm = NodePath("..")
+
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("SpringArm") instance=ExtResource("1_npt64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0330172, 1.24031, -0.0998495)
+SpringArm = NodePath("../SpringArm3D")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World"]
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50095, 0)
+shape = SubResource("BoxShape3D_ak32r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RigidBody3D"]
+mesh = SubResource("PlaneMesh_56eub")
+skeleton = NodePath("../../..")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 4.49547, 0.563392, 4.86118)
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50095, 0)
+shape = SubResource("BoxShape3D_ak32r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RigidBody3D2"]
+mesh = SubResource("PlaneMesh_56eub")
+skeleton = NodePath("../../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.44626, 0.894903, 0, -0.894903, 0.44626, 0, 5, 0)

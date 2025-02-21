@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://e6t6atol4hoi"]
+
+[ext_resource type="Script" path="res://Objects/Player.cs" id="1_mjn72"]
+[ext_resource type="PackedScene" uid="uid://d0b7atodahq3v" path="res://Assets/3DGodotRobot.glb" id="2_gc6j6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_amtx1"]
+height = 1.76452
+radius = 0.436111
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("anim")]
+script = ExtResource("1_mjn72")
+anim = NodePath("3DGodotRobot/AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00627327, 0.867983, 0)
+shape = SubResource("CylinderShape3D_amtx1")
+
+[node name="3DGodotRobot" parent="." instance=ExtResource("2_gc6j6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="3DGodotRobot/RobotArmature" index="0"]
+bones/0/position = Vector3(-3.5256e-16, 0.861288, 0.0298551)
+bones/4/position = Vector3(-3.65722e-16, 0.151501, -0.011741)
+bones/8/position = Vector3(9.97907e-08, 0.0611572, 0.418552)
+bones/9/position = Vector3(0.267321, 0.0764982, -0.028224)
+bones/9/rotation = Quaternion(-0.523067, -0.457802, -0.521926, 0.49438)
+bones/10/rotation = Quaternion(-0.356441, 0.617847, -0.433107, 0.551029)
+bones/13/position = Vector3(-0.267321, 0.0764982, -0.028224)
+bones/13/rotation = Quaternion(-0.523067, 0.457802, 0.521926, 0.49438)
+bones/14/rotation = Quaternion(-0.356441, -0.617847, 0.433107, 0.551029)
+bones/17/rotation = Quaternion(0.991415, 0.0203396, -0.00748625, 0.128945)
+bones/18/rotation = Quaternion(0.249628, 0.00871771, 0.024974, 0.967981)
+bones/19/rotation = Quaternion(-0.608714, 0.00331542, -0.00479121, 0.793369)
+bones/21/rotation = Quaternion(0.991415, -0.0203396, 0.00748626, 0.128945)
+bones/22/rotation = Quaternion(0.249628, -0.00871766, -0.0249741, 0.967981)
+bones/23/rotation = Quaternion(-0.608714, -0.00331544, 0.00479126, 0.793369)
+
+[editable path="3DGodotRobot"]
